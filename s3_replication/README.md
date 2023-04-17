@@ -1,4 +1,9 @@
 
+## s3.BucketにReplication Configurationを設定するサンプル
+こちらの記事で作成したプロジェクトです。
+https://zenn.dev/dokeita/articles/1ce7c728d2afab
+
+---
 # Welcome to your CDK Python project!
 
 This is a blank project for CDK development with Python.
