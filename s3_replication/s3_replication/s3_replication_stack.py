@@ -30,23 +30,11 @@ class S3ReplicationStack(Stack):
             }
         }
 
-        replication_configuration = s3.CfnBucket.ReplicationConfigurationProperty(
-            role="arn:aws:iam::123456789012:role/MyReplicationRole",
-            rules = s3.CfnBucket.ReplicationRuleProperty(
-                id="MyReplicationRule",
-                status="Enabled",
-                destination = s3.CfnBucket.ReplicationDestinationProperty(
-                    bucket="arn:aws:s3:::my-replica-bucket"
-                )
-            )
+        # Set the replication configuration on the CloudFormation bucket resource
+        cfn_bucket.add_property_override(
+            "ReplicationConfiguration",
+            {
+                "Role": "arn:aws:iam::123456789012:role/MyReplicationRole",
+                "Rules": [replication_rule]
+            }
         )
-        cfn_bucket.add_property_override("ReplicationConfiguration", replication_configuration)
-
-        # # Set the replication configuration on the CloudFormation bucket resource
-        # cfn_bucket.add_property_override(
-        #     "ReplicationConfiguration",
-        #     {
-        #         "Role": "arn:aws:iam::123456789012:role/MyReplicationRole",
-        #         "Rules": [replication_rule]
-        #     }
-        # )
